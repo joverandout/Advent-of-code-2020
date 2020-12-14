@@ -20,14 +20,14 @@ def partB():
         for i in f.read().splitlines():
             numbers.append(int(i))
 
-    target = -1
+    goal = -1
     for i in range(25,len(numbers)):
         current = numbers[i]
         for a, b in itertools.combinations(numbers[i-25:i], 2):
             if a + b == current:
                 break
         else:
-            target = current
+            goal = current
     head = 0
     tail = 0
     while head <= len(numbers):
@@ -35,11 +35,11 @@ def partB():
         if len(current_list) < 2:
             head += 1
         sum_list = sum(current_list)
-        if sum_list == target:
+        if sum_list == goal:
             return(max(current_list) + min(current_list))
-        elif sum_list < target:
+        elif sum_list < goal:
             head += 1
-        elif sum_list > target:
+        elif sum_list > goal:
             tail += 1
 
 print(partA())
