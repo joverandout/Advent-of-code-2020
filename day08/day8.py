@@ -21,10 +21,10 @@ def run(instructions: list) -> [bool, int]:
     is_terminated = ix == len(instructions)
     return is_terminated, accumulator
 
-with open('input08.txt') as f:
+with open('input08.txt') as file:
     inputs = [
         line
-        for line in f.read().splitlines()
+        for line in file.read().splitlines()
     ]
     instructions = []
     for line in inputs:
