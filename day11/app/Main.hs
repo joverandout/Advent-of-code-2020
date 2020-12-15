@@ -9,6 +9,9 @@ type Input = Plan
 data Pos = Floor | Empty | Taken deriving (Eq, Show)
 type Doubly = (Int, Int)
 
+iterationNext :: Plan -> Plan
+iterationNext state = M.mapWithKey (iteration state) state
+
 prepare :: String -> Input
 prepare input = M.fromList $ do
     (y, row) <- zip [0..] $ lines input
@@ -19,17 +22,19 @@ prepare input = M.fromList $ do
         parse 'L' = Empty
         parse '#' = Taken
 
-iterate :: Plan -> Doubly -> Pos -> Pos
-iterate state doub p = case p of
+iteration :: Plan -> Doubly -> Pos -> Pos
+iteration state doub p = case p of
     Floor -> Floor
     Empty | (length . filter (==Taken) . map (flip (M.findWithDefault Floor) state) . neighbouring $ doub) == 0 -> Taken
           | otherwise -> Empty
     Taken | (length . filter (==Taken) . map (flip (M.findWithDefault Floor) state) . neighbouring $ doub) >= 4 -> Empty
           | otherwise -> Taken
 
---length . filter (==Taken) . map (flip (M.findWithDefault Floor) state) . neighbors $ doub
-
-first = id
+first :: Input -> Int
+first m = let states = iterate iterationNext m
+              pairs = zip <*> tail $ states
+              firstDup = fst . head . dropWhile (uncurry (/=)) $ pairs
+          in length . filter (== Taken) . M.elems $ firstDup
 
 get :: IO String
 get = readFile "seatingPlan.txt"
