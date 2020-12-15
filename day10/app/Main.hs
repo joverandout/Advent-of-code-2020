@@ -29,5 +29,14 @@ part2 adapters = let inputs = S.fromList adapters
 prepare :: String -> Input
 prepare = map read . lines
 
+get :: IO String
+get = readFile "input.txt"
+
 main :: IO ()
-main = readFile "input.txt" >>= print . (part1 &&& part2) . prepare
+main = do
+    putStrLn "++++++++++++++++++++++++++++"
+    putStr "part 1: "
+    get >>= print . (part1) . prepare
+    putStr "part 2: "
+    get >>= print . (part2) . prepare
+    putStrLn "++++++++++++++++++++++++++++"
