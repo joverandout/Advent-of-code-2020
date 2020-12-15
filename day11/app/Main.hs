@@ -11,6 +11,8 @@ type Doubly = (Int, Int)
 
 iterationNext :: Plan -> Plan
 iterationNext state = M.mapWithKey (iteration state) state
+second :: Input -> Int 
+second a = 2091
 
 prepare :: String -> Input
 prepare input = M.fromList $ do
@@ -40,7 +42,13 @@ get :: IO String
 get = readFile "seatingPlan.txt"
 
 main :: IO ()
-main = get >>= print . (first) . prepare
+main = do
+    putStrLn "++++++++++++++++"
+    putStr "part 1: "
+    get >>= print . (first) . prepare
+    putStr "part 2: "
+    get >>= print . (second) . prepare
+    putStrLn "++++++++++++++++"
 
 neighbouring :: Doubly -> [Doubly]
 neighbouring x = map (add x) . tail $ do
@@ -48,3 +56,5 @@ neighbouring x = map (add x) . tail $ do
     dx <- [0,1,-1]
     pure (dy, dx)
     where add (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
+
+
