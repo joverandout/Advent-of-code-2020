@@ -5,13 +5,14 @@ module Main where
 import Control.Arrow ((&&&))
 import Data.List (foldl')
 
-type Pos = (Int, Int)
 data Compass = N | E | S | W deriving Show
 data Relative = F | L | R deriving Show
+
+type Pos = (Int, Int)
 data Ship = Ship {position :: Pos, heading :: Compass}
 data Command = Command Heading Int deriving Show
 data Heading = Absolute Compass | Relative Relative deriving Show
-data Traveler = Traveler {boat, marker :: Pos} deriving Show
+data User = User {boat, marker :: Pos} deriving Show
 
 type Input = [Command]
 
@@ -61,12 +62,12 @@ toDelta x = case x of
     W -> (-1, 0)
     E -> (1, 0)
 
-markerpart2 :: Traveler -> Command -> Traveler
-markerpart2 (Traveler pos wp) (Command t n) = case t of
-  Absolute c -> Traveler pos (move n c wp)
-  Relative F -> Traveler (posCalc n pos wp) wp
-  Relative R -> Traveler pos (right wp n 1)
-  Relative L -> Traveler pos (right wp n 3)
+markerpart2 :: User -> Command -> User
+markerpart2 (User pos wp) (Command t n) = case t of
+  Absolute c -> User pos (move n c wp)
+  Relative F -> User (posCalc n pos wp) wp
+  Relative R -> User pos (right wp n 1)
+  Relative L -> User pos (right wp n 3)
 
 right :: (Int, Int) -> Int -> Int -> (Int, Int)
 right wp n m = iterate turnRight wp !! (n * m)
@@ -83,5 +84,5 @@ main = do
        putStr   "part 1: "
        get >>= print . (part1 . position . foldl' follow (Ship (0,0) E)) . manVal
        putStr   "part: 2 "
-       get >>= print . (part1 . boat .foldl' markerpart2 (Traveler (0, 0) (10, 1))) . manVal
+       get >>= print . (part1 . boat .foldl' markerpart2 (User (0, 0) (10, 1))) . manVal
        putStrLn "++++++++++++++++"
