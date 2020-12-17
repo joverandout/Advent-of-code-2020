@@ -6,3 +6,5 @@ Languages used for solutions:
 * Days 1-9: Python
 * Days 10-12: Haskell
 * Days 13-14: Python
+* Day 15: Haskell
+
