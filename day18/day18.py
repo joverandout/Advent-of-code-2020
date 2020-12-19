@@ -58,7 +58,10 @@ def eval_bracket(line, bracket_index):
         if(firstBrac == True and line[count] == ")"):
             index2 = count-1
             break
-    swap_val = do_sum(line[index1+1:index2+1])
+    if(version2 == False):
+        swap_val = do_sum(line[index1+1:index2+1])
+    else:
+        swap_val = do_sum2(line[index1+1:index2+1])
     new_line = ""
     done = False
     for i in range(len(line)):
@@ -69,7 +72,31 @@ def eval_bracket(line, bracket_index):
             new_line += str(swap_val)
     return new_line
 
+def do_sum2(sum):
+    expr = []
+    first = 0
+    for i in range(0, len(sum)):
+        if sum[i] == " ":
+            expr.append(str(concat(first, i-1, sum)))
+            first = i+1
+    expr.append(str(concat(first, len(sum)-1, sum)))
+    while len(expr) > 1:
+        if "+" in expr:
+            i = expr.index("+")
+            new_val = int(expr[i-1]) + int(expr[i+1])
+            expr = expr[:i-1] + [str(new_val)] + expr[i+2:]
+        else:
+            stringy = ""
+            for a in range(len(expr)):
+                stringy += expr[a]
+                if(a != len(expr)-1):
+                    stringy += " "
+            return do_sum(stringy)
+
+    return int(expr[0])
+
 total = 0
+version2 = False
 with open("input.txt") as f:
     lines = f.read().splitlines()
 for line in lines:
@@ -77,5 +104,16 @@ for line in lines:
     while(countbracs(line2) == True):
         line2 = eval_line(line2, get_number_of_brackets(line2))
     line2 = do_sum(line2)
+    total = total + line2
+print(total)
+version2 = True
+total = 0
+with open("input.txt") as f:
+    lines = f.read().splitlines()
+for line in lines:
+    line2 = line
+    while(countbracs(line2) == True):
+        line2 = eval_line(line2, get_number_of_brackets(line2))
+    line2 = do_sum2(line2)
     total = total + line2
 print(total)
