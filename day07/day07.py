@@ -71,11 +71,3 @@ def a():
     file = open('input7.txt', 'r').read().replace("bags", "bag")
     rules = parse_rules(file)
     return(count_containers_of("shiny gold", rules))
-
-def solve(color):
-    ans = 1
-    for count, subcol in f[color]:
-        ans += count * solve(subcol)
-
-print(a())
-print(b(rules, "shiny gold", 1), -1)
