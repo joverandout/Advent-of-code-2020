@@ -7,7 +7,7 @@ Languages used for solutions:
 * Days 10-12: Haskell
 * Days 13-14: Python
 * Days 15-16: Haskell
-* Days 17-22: Python
+* Days 17-25: Python
 
 All the haskell solutions need to be run in a `stack` environment, such as the one seen in day 10. For other days that use haskell I haven't uploaded all the stack files as they're quite cluttered. To download `stack` please visit https://docs.haskellstack.org/en/stable/README/ To run use `stack run` but ensure all imported dependencies such as `intMaps` have been added to the `.cabal` file. 
 
