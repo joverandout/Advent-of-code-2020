@@ -24,18 +24,15 @@ To run the program and get the output to both parts concurrently without of the 
 stack run
 ```
 
-Python scripts are pretty straightforward and run as you would expect I suggest using `python3` as follows: `python3 filename.py`/ For example...
+Python scripts are pretty straightforward and run as you would expect I suggest using `python3` as follows: `python3 filename.py`/ For example on linux you will need to run...
 ```
 $ python3 day[xx].py
 ```
-On windows however run:
+On windows however the commadn you must run is different and depends on the version of your python instillation it will be one of either:
 ```
 python.exe day[xx].py
-```
-Or
-```
 py day[xx].py
 ```
-Depending on the version of your python installation. You can check this with the commands depending on your operating system. Consolt your help command if you have any issues.
+Depending on the version of your python installation. You can check this with the commands which varies based on your operating system. Consult your help command if you have any issues.
 
 
