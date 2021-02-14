@@ -28,7 +28,7 @@ Python scripts are pretty straightforward and run as you would expect I suggest 
 ```
 $ python3 day[xx].py
 ```
-On windows however the commadn you must run is different and depends on the version of your python instillation it will be one of either:
+On windows however the command you must run is different and depends on the version of your python installation it will be one of either:
 ```
 python.exe day[xx].py
 py day[xx].py
