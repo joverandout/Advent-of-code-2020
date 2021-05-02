@@ -12,7 +12,7 @@ Languages used for solutions:
 All the haskell solutions need to be run in a `stack` environment, such as the one seen in day 10. For other days that use haskell I haven't uploaded all the stack files as they're quite cluttered. To download `stack` please visit https://docs.haskellstack.org/en/stable/README/ To run use `stack run` but ensure all imported dependencies such as `intMaps` have been added to the `.cabal` file.  Once you've imported all necessary dependencies it is possible to test the individual functions:
 ```
 stack repl
-=> [function name] [function perameters]
+=> [function name] [function parameters]
 RESULT
 ```
 To run any written tests (although most days I haven't written any) run the following command:
